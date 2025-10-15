@@ -97,4 +97,40 @@ const loginUser=async (req,res)=>{
 }
 
 
-export default registerUser;
+
+//////////////////////////////////log out user//////////////////////////////////////
+
+ const logOutUser=async(req,res)=>{
+    try{
+        const userID=req.user._id;
+        if (!userID) {
+                return res.status(401).json({ message: "Unauthorized" });
+        }
+
+         const u= await User.findByIdAndUpdate(
+                        userID,
+                        {
+                           $unset: { refreshToken: "" }
+                        }
+                    );
+        const options={
+                httpOnly:true,
+                secure:true,
+            }
+         return res.status(200)
+                    .clearCookie("accessToken", options)
+                    .clearCookie("refreshToken", options)
+                    .json({
+                         message: "User logged out successfully",
+                         user: null,
+                     });
+    }catch(error){
+        console.log('error in logging out',error.message);
+        return res.status(401).json({message:"error in logging out"});
+    }
+ }
+
+
+
+
+export default {registerUser,loginUser,logOutUser};
