@@ -132,5 +132,29 @@ const loginUser=async (req,res)=>{
 
 
 
+/////////////////////////////////// find current user /////////////////////////////
+const getCurrentUser=async (req ,res)=>{
+         try{
+             if (!req.user) {
+                return res.status(401).json({ success: false, message: "Unauthorized access" });
+             }
+             
+             return res.status(200).json({
+                 success:true,
+                 message: "User fetched successfully",
+                 user: req.user,   // this is attached by verifyJWT middleware
+             });
+ 
+         }catch(er){
+             console.log("error while finding the current user ");
+             return res.status(500).json({message:"error while finding the current user "});
+         }
+}
 
-export default {registerUser,loginUser,logOutUser};
+
+
+
+
+
+
+export default {registerUser,loginUser,logOutUser,getCurrentUser};

@@ -43,7 +43,7 @@ const userSchema=new mongoose.Schema({
         type:Number,
         default:0,
     },
-    jobs:[{
+    jobs:[{//this store only the Job _ids in the User’s jobs array, not the full job documents.
         type: mongoose.Schema.Types.ObjectId,
         ref:"Job",
     }],

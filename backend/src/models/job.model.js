@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 const jobSchema=mongoose.Schema({
 
-    user:{
+    user:{//this store only the user’s _id in the Job document, not the whole user object.
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true,
@@ -20,6 +20,7 @@ const jobSchema=mongoose.Schema({
     },
     salary:{
         type:Number,
+        default:0,
     },
     status:{
         type:String,
