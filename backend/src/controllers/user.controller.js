@@ -132,7 +132,150 @@ const loginUser=async (req,res)=>{
 
 
 
+////////////////////////////////// update User Info //////////////////////////////////////
+const updateUserInfo=async(req,res)=>{
+    //find the user ref
+    //fetch the user form db
+    //update its info , save
+    //return new updated user 
+    try{
+        const userID=req.user._id;
+        if (!userID) {
+                return res.status(401).json({ message: "Unauthorized" });
+        }
+        
+        const {email,fullName,}=req.body;
+        if (!email && !fullName) {
+            return res.status(400).json({ message: "No fields provided to update" });
+        }
+
+        // Check if email already exists (if being updated)
+        if (email) {
+        const emailExists = await User.findOne({ email });
+        if (emailExists && emailExists._id.toString() !== userID.toString()) {
+            return res.status(400).json({ message: "Email already in use" });
+        }
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+        userID,
+        { $set: { ...(email && { email }), ...(fullName && { fullName }) } },
+        { new: true }
+        ).select("-password -refreshToken");
+
+        return res.status(200).json(
+            {
+                success:true,
+                message:"the info has been updated",
+                user:updatedUser,
+            }
+        )
+
+
+    }catch(error){
+        console.log('couldnt update user info');
+        return res.status(500).json({message:"couldnt update user info"});
+        
+    }
+}
+
+
+////////////////////////////////// add User skills //////////////////////////////////////
+const addSkill=async(req,res)=>{
+    //get the id 
+    //get the skill
+    //update and save
+    //return new user
+    try{
+        const userID=req.user._id;
+
+        const {skill}=req.body;
+        if (!skill || skill.trim() === "") {
+           return res.status(400).json({ message: "Skill is required" });
+        }
+
+        const user=await User.findById(userID);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // avoid duplicate skills
+        if (user.skills.includes(skill)) {
+            return res.status(400).json({ message: "Skill already exists" });
+        }
+
+        user.skills.push(skill);
+        await user.save();
+
+        const safeUser = user.toObject();
+        delete safeUser.password;
+        delete safeUser.refreshToken;
+
+        return res.status(200).json({
+        success: true,
+        message: "Skill added successfully",
+        user: safeUser,
+        });
+
+
+    }catch(error){
+        console.log('failed to add skill');
+        return res.status(500).json({message:"failed to update skill"});
+        
+    }
+}
+
+
+
+
+
+////////////////////////////////// delete User skills //////////////////////////////////////
+
+const removeSkill = async (req, res) => {
+  try {
+    const userID = req.user._id;
+    const { skill } = req.body;
+
+    if (!skill || skill.trim() === "") {
+      return res.status(400).json({ message: "Skill is required" });
+    }
+
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // check if skill exists
+    const skillIndex = user.skills.indexOf(skill);
+    if (skillIndex === -1) {
+      return res.status(400).json({ message: "Skill not found" });
+    }
+
+    // remove skill
+    user.skills.splice(skillIndex, 1); //splice(startIndex, deleteCount)
+    await user.save();
+
+    // clean user before sending back
+    const safeUser = user.toObject();
+    delete safeUser.password;
+    delete safeUser.refreshToken;
+
+    return res.status(200).json({
+      success: true,
+      message: "Skill removed successfully",
+      user: safeUser,
+    });
+
+  } catch (error) {
+    console.error("Failed to remove skill:", error);
+    return res.status(500).json({ message: "Failed to remove skill" });
+  }
+};
+
+
+
 /////////////////////////////////// find current user /////////////////////////////
+
 const getCurrentUser=async (req ,res)=>{
          try{
              if (!req.user) {
@@ -157,4 +300,4 @@ const getCurrentUser=async (req ,res)=>{
 
 
 
-export default {registerUser,loginUser,logOutUser,getCurrentUser};
+export default {registerUser,loginUser,logOutUser,updateUserInfo,addSkill,removeSkill,getCurrentUser};
