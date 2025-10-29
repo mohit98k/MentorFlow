@@ -1,7 +1,7 @@
 import Job from "../models/job.model.js";
 import User from "../models/user.model.js";
 
-const addJob=async(req,res)=>{
+export const addJob=async(req,res)=>{
      //get the job details from the user 
      //get the user id
      //find the user 
@@ -43,7 +43,7 @@ const addJob=async(req,res)=>{
     }
 }
 
-const updateJob = async (req,res)=>{
+export const updateJob = async (req,res)=>{
     //get the job id form the param , Frontend uses the Job _id when sending an update request.
     //ensure the user is authorize to edit the job means its his job
     //now get the info that the user wants to update 
@@ -84,7 +84,7 @@ const updateJob = async (req,res)=>{
     }
 }
 
-const removeJob=async(req,res)=>{
+export const removeJob=async(req,res)=>{
     //get the job id
     //find the user 
     //check if the user is authorize to delete the job
@@ -125,4 +125,3 @@ const removeJob=async(req,res)=>{
 }
 
 
-export default {addJob,updateJob,removeJob};

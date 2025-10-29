@@ -5,7 +5,7 @@ import User from "../models/user.model.js"
 
 //////////////////////////////register user///////////////////////////////////////
 
-const registerUser=async (req,res)=>{
+export const registerUser=async (req,res)=>{
     try{
          const {userName,password,email,fullName,}=req.body;
 
@@ -33,6 +33,9 @@ const registerUser=async (req,res)=>{
         .findById(newUser._id)
         .select("-password -refreshToken");
 
+        console.log('new user created '+ createdUser.userName);
+        
+
          return  res.status(201).json({
             message: "User created successfully",
             user: createdUser,
@@ -48,8 +51,9 @@ const registerUser=async (req,res)=>{
 
 ///////////////////////////////////////log in user///////////////////////////////////
 
-const loginUser=async (req,res)=>{
+export const loginUser=async (req,res)=>{
     try{
+       
         const {userName,email,password}=req.body;
         if(!(userName||email) || !password){
             console.log("username / email and pass are required ");
@@ -80,9 +84,10 @@ const loginUser=async (req,res)=>{
 
         const options={
             httpOnly:true, //cookie not accessible via JS on frontend
-            secure:true    //cookie only sent over HTTPS (important in production)
+            secure:process.env.NODE_ENV === "production", // only true in prod    
         }
-
+        console.log('logged in successfully '+ loggedInUser.userName); 
+        
         return res
         .status(200)
         .cookie("accessToken",accessToken,options)
@@ -100,7 +105,7 @@ const loginUser=async (req,res)=>{
 
 //////////////////////////////////log out user//////////////////////////////////////
 
- const logOutUser=async(req,res)=>{
+ export const logOutUser=async(req,res)=>{
     try{
         const userID=req.user._id;
         if (!userID) {
@@ -113,6 +118,8 @@ const loginUser=async (req,res)=>{
                            $unset: { refreshToken: "" }
                         }
                     );
+        console.log(u.userName + " is geeting logged out");
+        
         const options={
                 httpOnly:true,
                 secure:true,
@@ -132,8 +139,8 @@ const loginUser=async (req,res)=>{
 
 
 
-////////////////////////////////// update User Info //////////////////////////////////////
-const updateUserInfo=async(req,res)=>{
+////////////////////////////////// update User Info (email and full name only) //////////////////////////////////////
+export const updateUserInfo=async(req,res)=>{
     //find the user ref
     //fetch the user form db
     //update its info , save
@@ -163,6 +170,11 @@ const updateUserInfo=async(req,res)=>{
         { new: true }
         ).select("-password -refreshToken");
 
+        console.log('updated user info of '+updatedUser.userName);
+        console.log('new info : email -> ' + email +" fullName-> "+ fullName);
+        
+        
+
         return res.status(200).json(
             {
                 success:true,
@@ -173,7 +185,7 @@ const updateUserInfo=async(req,res)=>{
 
 
     }catch(error){
-        console.log('couldnt update user info');
+        console.log('couldnt update user info'+error.message);
         return res.status(500).json({message:"couldnt update user info"});
         
     }
@@ -181,7 +193,7 @@ const updateUserInfo=async(req,res)=>{
 
 
 ////////////////////////////////// add User skills //////////////////////////////////////
-const addSkill=async(req,res)=>{
+export const addSkill=async(req,res)=>{
     //get the id 
     //get the skill
     //update and save
@@ -231,7 +243,7 @@ const addSkill=async(req,res)=>{
 
 ////////////////////////////////// delete User skills //////////////////////////////////////
 
-const removeSkill = async (req, res) => {
+export const removeSkill = async (req, res) => {
   try {
     const userID = req.user._id;
     const { skill } = req.body;
@@ -274,13 +286,14 @@ const removeSkill = async (req, res) => {
 
 
 
-/////////////////////////////////// find current user /////////////////////////////
+/////////////////////////////////// find current user or dashboard user /////////////////////////////
 
-const getCurrentUser=async (req ,res)=>{
+export const getCurrentUser=async (req ,res)=>{
          try{
              if (!req.user) {
                 return res.status(401).json({ success: false, message: "Unauthorized access" });
              }
+             console.log("fetching the user info of " + req.user.userName);
              
              return res.status(200).json({
                  success:true,
@@ -293,11 +306,3 @@ const getCurrentUser=async (req ,res)=>{
              return res.status(500).json({message:"error while finding the current user "});
          }
 }
-
-
-
-
-
-
-
-export default {registerUser,loginUser,logOutUser,updateUserInfo,addSkill,removeSkill,getCurrentUser};

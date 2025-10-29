@@ -82,7 +82,7 @@ userSchema.methods.generateAccessToken=async function(){
       userName: this.userName,
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15m" } // access token valid for 15 minutes
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY} // access token valid for 15 minutes
   );
 }
 
@@ -92,7 +92,7 @@ userSchema.methods.generateRefreshToken=async function(){
       _id: this._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "7d" } // refresh token valid for 7 days
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY } // refresh token valid for 7 days
   );
 }
 
