@@ -29,6 +29,9 @@ export const addJob=async(req,res)=>{
             {$push:{jobs: job._id}},//pushes the created job id to the array of jobs in user
             { new: true } // return updated user
         )
+        //log
+        console.log('added the job at '+job.company+" to "+user.userName);
+        
 
         return res.status(201).json({
             message: "Job added successfully",
@@ -68,6 +71,9 @@ export const updateJob = async (req,res)=>{
         if (description) job.description = description;
 
         await job.save();
+
+        console.log('the job has been updated updated fields are : '+title+" "+company+" "+location+" "+salary+" "+status+" "+description);
+        
 
         return res.status(200).json(
             {
@@ -111,6 +117,10 @@ export const removeJob=async(req,res)=>{
         await User.findByIdAndUpdate(userId, {
         $pull: { jobs: jobId },//$pull removes any value from an array that matches a condition.
         });
+
+        //log
+        console.log('the job with role'+job.title+" of "+job.company+" was removed");
+        
 
         return res.status(200).json({
         success: true,

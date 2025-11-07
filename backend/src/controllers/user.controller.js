@@ -217,6 +217,8 @@ export const addSkill=async(req,res)=>{
         }
 
         user.skills.push(skill);
+        console.log(skill+" added to user "+ user.userName +" as skill ");
+        
         await user.save();
 
         const safeUser = user.toObject();
@@ -245,8 +247,8 @@ export const addSkill=async(req,res)=>{
 
 export const removeSkill = async (req, res) => {
   try {
-    const userID = req.user._id;
-    const { skill } = req.body;
+    const userID = req.user._id;//auth middleware helped here
+    const { skill } = req.params;
 
     if (!skill || skill.trim() === "") {
       return res.status(400).json({ message: "Skill is required" });
@@ -262,11 +264,14 @@ export const removeSkill = async (req, res) => {
     if (skillIndex === -1) {
       return res.status(400).json({ message: "Skill not found" });
     }
-
+    
     // remove skill
     user.skills.splice(skillIndex, 1); //splice(startIndex, deleteCount)
     await user.save();
 
+    //log
+    console.log('the skill : '+skill+" was removed from user "+user.userName);
+    
     // clean user before sending back
     const safeUser = user.toObject();
     delete safeUser.password;
