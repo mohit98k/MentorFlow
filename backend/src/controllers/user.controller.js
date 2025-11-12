@@ -299,11 +299,12 @@ export const getCurrentUser=async (req ,res)=>{
                 return res.status(401).json({ success: false, message: "Unauthorized access" });
              }
              console.log("fetching the user info of " + req.user.userName);
-             
+             //populate the user so the jobs are well populated not just id full info attached
+             const populatedUser = await req.user.populate("jobs");
              return res.status(200).json({
                  success:true,
                  message: "User fetched successfully",
-                 user: req.user,   // this is attached by verifyJWT middleware
+                 user: populatedUser,   // this is attached by verifyJWT middleware
              });
  
          }catch(er){

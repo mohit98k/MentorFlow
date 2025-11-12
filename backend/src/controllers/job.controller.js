@@ -26,7 +26,9 @@ export const addJob=async(req,res)=>{
 
         const user=await User.findByIdAndUpdate(
             userId,
-            {$push:{jobs: job._id}},//pushes the created job id to the array of jobs in user
+            {$push:{jobs: job._id},
+             $inc:{jobsAppliedCount:1}
+            },//pushes the created job id to the array of jobs in user
             { new: true } // return updated user
         )
         //log
@@ -116,6 +118,7 @@ export const removeJob=async(req,res)=>{
         //remove the ref form db
         await User.findByIdAndUpdate(userId, {
         $pull: { jobs: jobId },//$pull removes any value from an array that matches a condition.
+        $inc:{jobsAppliedCount:-1}//decrement the job count in that user 
         });
 
         //log

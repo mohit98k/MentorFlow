@@ -31,6 +31,9 @@ const userSchema=new mongoose.Schema({
         type:Number,
         default:0,
     },
+    resumeUrls:[{
+        type:String,
+    }],
     skills:[{
         type:String,
         trim:true,
