@@ -23,3 +23,6 @@ const resumeSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model("Resume", resumeSchema);
+
+//right now this resume model has no use cause i dont want to show the user its all previous uploaded resume 
+//will think about it later

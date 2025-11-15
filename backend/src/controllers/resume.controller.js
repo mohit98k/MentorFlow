@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 dotenv.config();
 import User from "../models/user.model.js";
+// import Resume from "../models/resume.model.js" right now im not goona store it in a data model 
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);

@@ -21,4 +21,7 @@ app.use("/api/v1/resume",resumeRoutes);
 import jobRoutes from "./routes/job.routes.js";
 app.use("/api/v1/job",jobRoutes);
 
+import roadMapRoutes from "./routes/roadmap.routes.js";
+app.use("/api/v1/roadmaps",roadMapRoutes);
+
 export default app;

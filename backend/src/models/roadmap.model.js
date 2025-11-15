@@ -12,15 +12,13 @@ const roadMapSchema=new mongoose.Schema({
     description:{
         type:String, 
     },
-    techStack:[{
+    resources:[{
         type:String,
     }],
     milestones: [{
-        milestoneTitle: { type: String, required: true },
-        description: { type: String },
-        completed: { type: Boolean, default: false },
+        type:String,
     }],
-    progress:{
+    progress:{//not needed for the mvp
         type:Number,
         default:0,
     },

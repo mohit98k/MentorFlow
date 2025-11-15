@@ -300,11 +300,16 @@ export const getCurrentUser=async (req ,res)=>{
              }
              console.log("fetching the user info of " + req.user.userName);
              //populate the user so the jobs are well populated not just id full info attached
-             const populatedUser = await req.user.populate("jobs");
+             //do the same for the learning path
+             const user =await User.findById(req.user._id)
+             .select("-password -refreshToken")
+             .populate("jobs")//this jobs name is in the user model 
+             .populate("roadMaps")//this spelling of roadMaps is in the user model
+             
              return res.status(200).json({
                  success:true,
                  message: "User fetched successfully",
-                 user: populatedUser,   // this is attached by verifyJWT middleware
+                 user  ,
              });
  
          }catch(er){
