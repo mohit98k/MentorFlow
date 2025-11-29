@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 app.use(cookieParser());
 
 app.use(cors({
-    origin:"http://localhost:5173" // your React frontend
+    origin:"http://localhost:5173" //  React frontend
 }));
 
 app.use(express.json()); // to parse JSON bodies
