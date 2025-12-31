@@ -8,3 +8,4 @@ const router = express.Router();
 router.post("/upload", verifyJWT, uploadResume.single("resume"), reviewResume);
 
 export default router;
+

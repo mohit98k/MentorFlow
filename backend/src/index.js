@@ -7,6 +7,7 @@ const PORT =process.env.PORT || 3000;
 
 const startServer=async ()=>{
     try{
+      
        await connectDb();
        app.listen(PORT,()=>{
         console.log(`app is listning on ${PORT}`);

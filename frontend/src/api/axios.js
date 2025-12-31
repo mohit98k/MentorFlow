@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//// Creating a base Axios instance
+// Creating a base Axios instance
 const API = axios.create({
     baseURL:"http://localhost:3000/api/v1",
 
@@ -18,5 +18,10 @@ API.interceptors.request.use(
         return config;
     }
 )
+
+//define endpoints here
+export const register=(data)=>API.post("/user/register",data);
+export const login=(data)=>API.post("/user/login",data);
+export const getUser=()=>API.get("/user/user");
 
 export default API;

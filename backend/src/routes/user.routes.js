@@ -1,5 +1,5 @@
 import express from "express"
-const router=express.Router();
+const router=express.Router();//router is a mini express app
 import {registerUser,loginUser,logOutUser,updateUserInfo,addSkill,removeSkill,getCurrentUser} from "../controllers/user.controller.js";
 import verifyJWT from "../middlewares/auth.middleware.js";
 

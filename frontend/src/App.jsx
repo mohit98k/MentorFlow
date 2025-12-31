@@ -1,8 +1,9 @@
-import { Register } from "./pages/auth/Register"
+import  Register  from "./pages/auth/Register"
+import AppRouter from "./router/Approuter"
 function App() {
   return (
     <>
-      <Register/>
+      <AppRouter/>
     </>
   )
 }
