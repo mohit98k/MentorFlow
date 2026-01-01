@@ -36,6 +36,47 @@ this component watches the url and loads the componenet accordingly;
 
 ***LOGIN***
 
+create a route in approuter;
+
+store the access token in the local storage ;
+
+***PUBLIC ROUTE***
+
+BLOCK THE AUTHENTICATED USER FORM AUTH PAGES;
+
+maintains the auth flow ;
+
+if the user is logged in check by the token saved in local storage , block him from the log in and register route;
+
+to use this wrap the register and login route with it ;
+
+***PROTECTED ROUTE***
+
+BLOCKS THE UNAUTHENTICATED USER FROM PROTECTED PAGES 
+
+the unregisterd / unlogged user cannot access the dashboard and stuff yk
+
+***NAVIGATE HOOK***
+
+const navigate=useNavigate() ;
+navigate("/login" , { replace: true }); // “DO this now” ;
+
+<Navigate to="/dashboard" replace /> = “THIS should be rendered instead”;
+
+replace = “don’t allow going back”;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

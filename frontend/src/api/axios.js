@@ -13,8 +13,8 @@ const API = axios.create({
 //the config is the req configuration object { url:/user/resume , method: "GET", header : {} } like this 
 API.interceptors.request.use(
     (config)=>{
-        const token=localStorage.getItem("token");
-        if(token)config.headers.Authorization=`Bearer ${token}`;
+        const accessToken=localStorage.getItem("accessToken");
+        if(accessToken)config.headers.Authorization=`Bearer ${accessToken}`;
         return config;
     }
 )

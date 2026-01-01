@@ -31,6 +31,7 @@ const Login = () => {
       const payload={userName,email,password};
       const res=await login(payload);
       console.log(res);
+      localStorage.setItem("accessToken",res.data.accessToken);
       navigate("/user/user");
       
     }catch(err){
