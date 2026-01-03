@@ -9,7 +9,7 @@ const  PublicRoute  = ({children}) => {
     }
    if(isAuth){
     //the user is logged in so redirct to dashboard
-   return <Navigate to="/user/user" replace />;
+   return <Navigate to="/dashboard" replace />;
    }else{
     return children;
    }

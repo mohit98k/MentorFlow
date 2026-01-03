@@ -32,7 +32,7 @@ const Login = () => {
       const res=await login(payload);
       console.log(res);
       localStorage.setItem("accessToken",res.data.accessToken);
-      navigate("/user/user");
+      navigate("/dashboard");
       
     }catch(err){
       const msg =
@@ -43,12 +43,12 @@ const Login = () => {
   }
 
   return (
-   <div className='bg-[#252850] text-center  flex flex-col min-h-screen items-center justify-center'>
+   <div className='bg-zinc-900 text-center  flex flex-col min-h-screen items-center justify-center'>
    
            <div className='text-center text-[#17b2dd] font-bold text-2xl p-2'>MentorFlow</div>
            <div className='p-1 text-center m-2 '>
-               <Link to="/user/register"  className='p-1 mr-2 text-[#84a9b4] font-semibold'>Sing up</Link>
-               <Link to="/user/login" className='p-1 ml-2 text-[#84a9b4] font-semibold'>Log in</Link>
+               <Link to="/register"  className='p-1 mr-2 text-[#84a9b4] font-semibold'>Sing up</Link>
+               <Link to="/login" className='p-1 ml-2 text-[#84a9b4] font-semibold'>Log in</Link>
            </div>
            <div className='flex justify-center '>
                  <form className='w-64 p-1  flex flex-col gap-2' onSubmit={handleSubmit} >

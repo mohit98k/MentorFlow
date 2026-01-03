@@ -1,9 +1,13 @@
 import { Route,Routes } from "react-router-dom";
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
-import { Dashboard } from "../pages/Dashboard";
 import PublicRoute from "./PublicRoute ";
 import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../pages/Dashboard";
+import Jobs from "../pages/Jobs";
+import Resume from "../pages/Resume";
+import Roadmaps from "../pages/Roadmaps";
 
 const AppRouter=()=>{
     return (
@@ -23,7 +27,7 @@ const AppRouter=()=>{
 
             <Route 
 
-              path="/user/register" 
+              path="/register" 
 
               element={
                 <PublicRoute>
@@ -34,7 +38,7 @@ const AppRouter=()=>{
 
             <Route
             
-              path="/user/login" 
+              path="/login" 
               
               element={
                 <PublicRoute>
@@ -43,15 +47,21 @@ const AppRouter=()=>{
 
             }/>
 
+{/* nested routing wattch out !!! */}
+
             <Route 
-              
-              path="/user/user" 
-              
               element={
                 <PrivateRoute>
-                    <Dashboard/>
+                    <DashboardLayout/>
                 </PrivateRoute>
-              }/>
+              }
+            >
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/roadmaps" element={<Roadmaps />} />
+              <Route path="/resume" element={<Resume />} />
+
+            </Route>
             
         </Routes>
     );

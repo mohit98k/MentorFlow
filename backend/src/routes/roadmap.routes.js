@@ -5,6 +5,6 @@ import {generatePath}from "../controllers/roadmap.controller.js";
 const router = express.Router();
 
 //roadmaps
-router.get("/",verifyJWT,generatePath);
+router.get("/generate",verifyJWT,generatePath);
 
 export default router;

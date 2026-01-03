@@ -10,9 +10,11 @@ api/ - for axios setup
 
 e.preventDefault(); use this to not relode after form submission ;
 
-for base url like http://localhost3000 set the register page as default component;
+For base url like http://localhost3000 set the register page as default component or the dashboard for the authenticated user;
 
-for axios to get the jwt from local storage and attacth it with all the next requests we need to store the token into the local storage and block the user from logging in or registering again for this session 
+For axios to get the jwt from local storage and attacth it with all the next requests we need to store the token into the local storage and block the user from logging in or registering again for this session 
+
+Frontend routes represent UI pages, not API capabilities.so everywhere ill try to route in frontend ill use frontend component names to route and only in the axios file ill use my actual backend routes  / endpoints ;
 
 ***AXIOS***
 
@@ -66,11 +68,14 @@ navigate("/login" , { replace: true }); // “DO this now” ;
 replace = “don’t allow going back”;
 
 
+*** SIDE-BAR ***
 
+Auth pages → no sidebar (login, register)
+App pages → sidebar always visible (dashboard, roadmaps, jobs, resume);
 
+for this i need a layout , where the sidebar is constant and another variable side page to render;
 
-
-
+those variable side pages will be outlet , and nested routing will help in routing them ;
 
 
 
