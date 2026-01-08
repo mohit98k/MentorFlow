@@ -8,6 +8,8 @@ import Dashboard from "../pages/Dashboard";
 import Jobs from "../pages/Jobs";
 import Resume from "../pages/Resume";
 import Roadmaps from "../pages/Roadmaps";
+import Profile from "../pages/Profile";
+import Logout from "../pages/Logout";
 
 const AppRouter=()=>{
     return (
@@ -60,6 +62,8 @@ const AppRouter=()=>{
               <Route path="/jobs" element={<Jobs />} />
               <Route path="/roadmaps" element={<Roadmaps />} />
               <Route path="/resume" element={<Resume />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/logout" element={<Logout />} />
 
             </Route>
             

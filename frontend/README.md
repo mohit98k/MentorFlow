@@ -87,3 +87,7 @@ those variable side pages will be outlet , and nested routing will help in routi
 
 
 
+
+
+
+

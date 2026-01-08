@@ -1,5 +1,5 @@
 import  Register  from "./pages/auth/Register"
-import AppRouter from "./router/Approuter"
+import AppRouter from "./router/AppRouter"
 function App() {
   return (
     <>
