@@ -1,8 +1,14 @@
 import React from 'react'
+import { replace, useNavigate } from 'react-router-dom'
 
 const LogoutButton = () => {
+
+  const navigate=useNavigate();
+
   const handleClick=()=>{
-        console.log("log out");
+        localStorage.removeItem("accessToken");
+        navigate("/login",{replace:true});
+        console.log("the user got logged out");
     }
   return (
     <div>
@@ -14,3 +20,7 @@ const LogoutButton = () => {
 }
 
 export default LogoutButton;
+
+
+
+ 

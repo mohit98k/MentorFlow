@@ -23,5 +23,6 @@ API.interceptors.request.use(
 export const register=(data)=>API.post("/user/register",data);
 export const login=(data)=>API.post("/user/login",data);
 export const getUser=()=>API.get("/user/user");
+export const logout=()=>API.post("/user/logout");
 
 export default API;

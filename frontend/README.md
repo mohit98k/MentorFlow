@@ -68,7 +68,7 @@ navigate("/login" , { replace: true }); // “DO this now” ;
 replace = “don’t allow going back”;
 
 
-*** SIDE-BAR ***
+*** SIDE-BAR *** LAYOUT ***
 
 Auth pages → no sidebar (login, register)
 App pages → sidebar always visible (dashboard, roadmaps, jobs, resume);
@@ -76,9 +76,15 @@ App pages → sidebar always visible (dashboard, roadmaps, jobs, resume);
 for this i need a layout , where the sidebar is constant and another variable side page to render;
 
 those variable side pages will be outlet , and nested routing will help in routing them ;
+    ( flex-1 → content auto-fills int the outlet )
 
 
+*** Logout ***
+log out logic from frontend perspective
 
+ remove token
+ redirect to auth page 
+ prevent back navigation to dashboard or to any protected page
 
 
 

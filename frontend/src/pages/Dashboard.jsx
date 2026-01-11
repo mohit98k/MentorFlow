@@ -17,7 +17,7 @@ const Dashboard = () => {
       <LogoutButton/>
       </div>
       
-      <div className='grid sm-grid-cols-2 grid-cols-3 gap-6 mb-8 p-2' >
+      <div className='grid grid-cols-2 md-grid-cols-4 gap-6 mb-8 p-2 flex-wrap' >
           <Statcard
             Icon={Target}
             title="4 Active Path"
