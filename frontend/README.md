@@ -80,14 +80,25 @@ those variable side pages will be outlet , and nested routing will help in routi
 
 
 *** Logout ***
+
 log out logic from frontend perspective
 
  remove token
  redirect to auth page 
  prevent back navigation to dashboard or to any protected page
 
+*** GET USER : API CALL ***
 
+Fetch once → store globally → consume everywhere
 
+UserContext / usecontext :  Store & share user data ✅ pure state container no api call here
+DashboardLayout  / PrivateRoute  :	Decide when to fetch , call the get user api here 
+main.jsx is wrapped by provider so any compo can read data(Components : Read data)
+
+create the user context , export the setuser and const user and the user provider 
+wrap the app in main with user provider 
+call the api in dashboard layout by using useEffect hook and set the user 
+use the user in any component now
 
 
 
