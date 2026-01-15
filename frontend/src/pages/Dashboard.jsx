@@ -4,6 +4,8 @@ import { Target, FileText, Briefcase , TrendingUp ,Sparkles } from "lucide-react
 import LogoutButton from '../components/ui/LogoutButton';
 import { useUser } from '../context/UserContext';
 
+
+//i was tooo lazy to write a new backend route for this suggestion feature ,so thought of this trick !!!!!!!!!
 const aiSuggestions = [
   "Dive into Neuro-Symbolic Hybrid Learning to sharpen your reasoning + pattern skills.",
   "Explore Federated Privacy-Preserving Representation Learning to master secure data collaboration.",
@@ -16,7 +18,7 @@ const aiSuggestions = [
   "Try program synthesis using LLM toolchains to see how models write code from pure logic.",
   "Analyze neural scaling laws to predict and control emergent behavior in massive models."
 ];
-
+//pick the random index to show the two suggesstions
 let index1 = Math.floor(Math.random() * 10); 
 let index2 = Math.floor(Math.random() * 10); 
 if(index1==index2){
@@ -33,7 +35,7 @@ const Dashboard = () => {
   if (!user) {
     return null; 
   }
-  console.log(user);
+ 
  
 
   return (
