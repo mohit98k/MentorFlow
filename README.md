@@ -17,3 +17,4 @@ Write mobile styles first. Add overrides at breakpoints.
 
 
 
+remember to remove the consolelog(user) before sendin in production 

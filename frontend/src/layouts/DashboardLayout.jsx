@@ -28,7 +28,7 @@ const DashboardLayout = () => {
       };
       fetchUser();
 
-    },[]);
+    });
     
 
   const [open , setOpen]=useState(false);

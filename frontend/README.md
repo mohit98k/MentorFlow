@@ -101,6 +101,9 @@ call the api in dashboard layout by using useEffect hook and set the user
 use the user in any component now
 
 
+*** PROFILE ***
+
+dont use for loop use map to return component like skilltags from a skill array 
 
 
 
