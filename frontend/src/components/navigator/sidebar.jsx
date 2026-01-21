@@ -8,6 +8,7 @@ const Sidebar = () => {
   }
 
   return (
+    
     <div className=' h-full  flex  flex-col gap-3 w-64 bg-zinc-900 text-white p-4   '>
 
        <NavLink to="/profile" className={activeStyle}>My profile</NavLink>
@@ -28,6 +29,8 @@ const Sidebar = () => {
       </NavLink>
        
     </div>
+   
+   
   )
 }
 

@@ -45,7 +45,7 @@ const DashboardLayout = () => {
             <X className=''/>
           </button>
 
-          <Sidebar className=''/>
+          <Sidebar />
           
         </aside>
 
@@ -53,7 +53,7 @@ const DashboardLayout = () => {
 
       <Menu className={  `md:hidden  ${open ? "hidden" : "flex" } bg-inherit text-white p-1 h-12 w-12 mt-4`} onClick={()=>setOpen(true)}/>
 
-      <main className='md:p-4 min-h-screen'>
+      <main className='md:p-4  '>
         <Outlet/>
       </main>
     </div>

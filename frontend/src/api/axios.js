@@ -39,5 +39,6 @@ export const getUser=()=>API.get("/user/user");
 export const logout=()=>API.post("/user/logout");
 export const update=(data)=>API.put("user/user",data);
 export const addSkill=(data)=>API.post("user/skills",data);
-export const deleteSkill=(skillname)=>API.delete(`user/skills/${skillname}`);//needs debugging 
+export const deleteSkill=(skillname)=>API.delete(`user/skills/${skillname}`);
+export const analyzeResume=(data)=>API.post("user/resume/upload",data);
 export default API;

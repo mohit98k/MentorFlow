@@ -26,7 +26,7 @@ const Profile = () => {
    let skills=user.user.skills;
    const [fname, lname] = user.user.fullName.split(" ");
    const email=user.user.email;
-
+   const [emailError,setemailError]=useState("");
    
 
    const handleClick=async ()=>{
@@ -41,11 +41,14 @@ const Profile = () => {
 
    const handleUpdate=async ()=>{
     try{
+      setemailError("");
       const fullname=(newFName?newFName:fname)+" "+(newLName?newLName:lname);
       const res=await update({fullName:fullname,email:newEmail});
       console.log(res);
     }catch(err){
-      console.log(err);
+     let emailErrormssg=err.response.data.message;
+     setemailError(emailErrormssg);
+      console.log(emailErrormssg);
     }
    }
    
@@ -98,6 +101,7 @@ const Profile = () => {
          <div className='m-3'>
             <div className='flex flex-col'>
                 <label htmlFor="">Email</label>
+                {emailError && <label className='text-red-500'>{emailError}</label>}
                 <input type="text"
                 className='bg-zinc-700 rounded-md border-none p-1 pl-2 md:w-5/12'   
                 placeholder={email}
@@ -135,7 +139,12 @@ const Profile = () => {
                   <input type="text" 
                   value={newSkill} 
                   onChange={(e)=>{setNewSkill(e.target.value)}}
-                 
+                  onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleClick();
+                          setNewSkill("");
+                        }
+                      }}
                   className='bg-zinc-700 rounded-md border-none p-1 pl-2 w-48'   placeholder='new skill'/>
                   <Plus className='bg-blue-400 rounded-md'
                     onClick={

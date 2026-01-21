@@ -105,7 +105,11 @@ use the user in any component now
 
 dont use for loop use map to return component like skilltags from a skill array 
 
-
+to make a particular key of the keyboard work use: onKeyDown={(e) =>  if (e.key === "Enter") {handleClick();}}
+   
+      
+      
+   
 
 
 
