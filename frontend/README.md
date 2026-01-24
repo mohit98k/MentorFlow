@@ -16,6 +16,11 @@ For axios to get the jwt from local storage and attacth it with all the next req
 
 Frontend routes represent UI pages, not API capabilities.so everywhere ill try to route in frontend ill use frontend component names to route and only in the axios file ill use my actual backend routes  / endpoints ;
 
+useState only lives as long as the component instance lives
+    (Routing = destroy component → lose state.) so lift up states to a layout to fix it  or store in context
+
+
+
 ***AXIOS***
 
 configure axios by defining the endpoints of routes and to attach the jwt token with every request in a modular way
@@ -108,8 +113,19 @@ dont use for loop use map to return component like skilltags from a skill array
 to make a particular key of the keyboard work use: onKeyDown={(e) =>  if (e.key === "Enter") {handleClick();}}
    
       
-      
-   
+*** RESUME *** 
+
+axios route:
+
+    export const analyzeResume=(data)=>API.post("user/resume/upload",data); <!--the data has to be a form data  -->
+
+handle upload function: 
+
+    Files are sent as multipart/form-data, not JSON.
+    if backend is upload.single("resume") then in frontend haldle upload fun : formData.append("resume", resumeFile);
+
+
+
 
 
 

@@ -11,7 +11,8 @@ import { useUser } from '../context/UserContext';
 
 
 const DashboardLayout = () => {
-
+  
+  const [resumeSuggestions, setResumeSuggestions] = useState([]);
   const {setUser,setLoading}=useUser();
 
   useEffect(()=>{
@@ -20,6 +21,7 @@ const DashboardLayout = () => {
         try{
           const res=await getUser();
           setUser(res.data);
+          console.log(res);
         }catch(err){
           console.log(err);
         }finally{
@@ -28,7 +30,7 @@ const DashboardLayout = () => {
       };
       fetchUser();
 
-    });
+    },[]);
     
 
   const [open , setOpen]=useState(false);
@@ -54,7 +56,7 @@ const DashboardLayout = () => {
       <Menu className={  `md:hidden  ${open ? "hidden" : "flex" } bg-inherit text-white p-1 h-12 w-12 mt-4`} onClick={()=>setOpen(true)}/>
 
       <main className='md:p-4  '>
-        <Outlet/>
+        <Outlet context={{ resumeSuggestions, setResumeSuggestions }}/>
       </main>
     </div>
 
