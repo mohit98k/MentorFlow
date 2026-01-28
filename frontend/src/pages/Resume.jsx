@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FileText, Upload, Sparkles } from "lucide-react";
 import { analyzeResume } from '../api/axios';
 import { useUser } from '../context/UserContext';
-import { useOutletContext } from 'react-router-dom';
+import { UNSAFE_decodeViaTurboStream, useOutletContext } from 'react-router-dom';
 
 const Resume = () => {
 
@@ -14,6 +14,9 @@ const Resume = () => {
   // const[suggesstions,setSuggesstions]=useState([]); lift up this state to dashboard lay out cause of the re-rendering problem
   const { resumeSuggestions, setResumeSuggestions } = useOutletContext();
   const[requestSent,setRequestsent]=useState(false);
+  const[error,setError]=useState(null); 
+  const[complement,setComplement]=useState("");
+
 
   const[atsScore,setatsScore]=useState(0);
     useEffect(() => {
@@ -30,25 +33,46 @@ const Resume = () => {
       return null; 
     }
  
+
+  //most imp fn of this component 
   const handleUpload=async()=>{
+
     if(!resumefile)return;
     if (requestSent) return; 
     const formData=new FormData();
     formData.append("resume",resumefile);
+
     try{
+      setError(null);
       setResumeSuggestions([]);
       setRequestsent(true);
       const res=await analyzeResume(formData);
-      setatsScore(res.data.data.ats_score);
+      let score=res.data.data.ats_score;
+      helpComplement(score);
+      setatsScore(score);
       setResumeSuggestions(res.data.data.suggestions);
       console.log(res);
     }catch(err){
       console.log(err);
+      setError(err.message);
     }finally{
       setRequestsent(false);
     }
   }
-  
+  //helper function to set the complement accrdng to the score
+  const helpComplement=(score)=>{
+    if(score>=90){
+      setComplement("VeryStrong Resume");
+    }else if(score>=80 && score<90){
+      setComplement("Strong Resume");
+    }else if(score>=70 && score<80){
+      setComplement("Good Resume");
+    }else{
+      setComplement("Weak Resume");
+    }
+  }
+
+
   return (
     <div className='bg-inherit min-h-screen text-white '>
        <div className='p-2'>
@@ -99,7 +123,7 @@ const Resume = () => {
                 </div>
             </div>
             <div className='flex justify-center font-semibold text-lg'> 
-                Strong Resume
+                {complement}
             </div>
             <div className='text-gray-400 mb-5'>
               Your resume shows good structure and relevant experience
@@ -117,10 +141,20 @@ const Resume = () => {
         ))}
       </div>
     )}
+    {/* error box */}
+    {(error != null) && (
+      <div className='p-4'>
+            <div className='border-2 border-red-400 rounded-lg p-2 '>
+              {error}
+            </div>
+      </div>
+    )}
 
       
     </div>
   )
 }
 
-export default Resume
+export default Resume;
+
+//148 3 to the 3 to the 6 to the 9 representing the ABQ WupB leave it at the tone _jpinkmen

@@ -32,7 +32,9 @@ API.interceptors.response.use(
 );
 
 
-//define endpoints here
+//endpoints are defined below |
+//                            V
+//user Routes
 export const register=(data)=>API.post("/user/register",data);
 export const login=(data)=>API.post("/user/login",data);
 export const getUser=()=>API.get("/user/user");
@@ -40,5 +42,10 @@ export const logout=()=>API.post("/user/logout");
 export const update=(data)=>API.put("user/user",data);
 export const addSkill=(data)=>API.post("user/skills",data);
 export const deleteSkill=(skillname)=>API.delete(`user/skills/${skillname}`);
+//resume routes
 export const analyzeResume=(data)=>API.post("resume/upload",data);//the data has to be a form data 
+//job routes
+export const addJob=(data)=>API.post("/job/jobs",data);
+export const updateJob=(jobID)=>API.put(`/job/jobs/${jobID}`);
+export const deleteJob=(jobID)=>API.delete(`job/jobs/${jobID}`);
 export default API;
