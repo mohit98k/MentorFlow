@@ -14,7 +14,7 @@ const Profile = () => {
    const [newLName,setNewLName]=useState("");
    const [newEmail,setNewEmail]=useState("");
    const [newSkill,setNewSkill]=useState("");
-   
+   const [emailError,setemailError]=useState("");
     //save the app from crash 
     if (loading) {
       return <div className="text-white">Loading...</div>;
@@ -22,11 +22,11 @@ const Profile = () => {
     if (!user) {
       return null; 
     }
-
+   
    let skills=user.user.skills;
    const [fname, lname] = user.user.fullName.split(" ");
    const email=user.user.email;
-   const [emailError,setemailError]=useState("");
+  
    
 
    const handleClick=async ()=>{
@@ -123,7 +123,7 @@ const Profile = () => {
                 <div className='text-gray-400'>Track your technical and soft skills</div>
             </div>
 
-            <div className='m-4'>
+            <div className='m-4 '>
                 {skills.map((s, i) => (
                   <SkillTag key={i} skillname={s} />
                 ))}

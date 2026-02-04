@@ -19,6 +19,7 @@ Frontend routes represent UI pages, not API capabilities.so everywhere ill try t
 useState only lives as long as the component instance lives
     (Routing = destroy component → lose state.) so lift up states to a layout to fix it  or store in context
 
+Hooks must be called unconditionally and in the same order on every render.
 
 
 ***AXIOS***
@@ -123,6 +124,19 @@ handle upload function:
 
     Files are sent as multipart/form-data, not JSON.
     if backend is upload.single("resume") then in frontend haldle upload fun : formData.append("resume", resumeFile);
+
+
+*** JOBS ***
+in the jobs page get the user and display the jobs array as in cards 
+
+while updating the jobs in the jobcard.jsx using the handleUpdate -> Backend updates the job in DB , frontend ui only updates on refresh , 
+React only re-renders when state or props change not when the db changes .
+When a job is edited in JobCard, it must ask the parent to update the state. so use onUpdate function
+it takes the updated job form the child jobcard
+loops over the current job list if the id matches it updates the joblist and ui updates 
+pass the onupdate function as props to jobcard
+after updating the job use onUpdate(res.data); res is the updated job 
+
 
 *** ROADMAPS ***
 

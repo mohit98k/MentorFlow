@@ -17,4 +17,4 @@ Write mobile styles first. Add overrides at breakpoints.
 
 
 
-remember to remove the consolelog(user) before sendin in production 
+remember to remove the consolelog(user) before sendin in production and the dependency list fromthe ddashboard layout 

@@ -46,6 +46,8 @@ export const deleteSkill=(skillname)=>API.delete(`user/skills/${skillname}`);
 export const analyzeResume=(data)=>API.post("resume/upload",data);//the data has to be a form data 
 //job routes
 export const addJob=(data)=>API.post("/job/jobs",data);
-export const updateJob=(jobID)=>API.put(`/job/jobs/${jobID}`);
+export const updateJob=(jobID,data)=>API.put(`/job/jobs/${jobID}`,data);
 export const deleteJob=(jobID)=>API.delete(`job/jobs/${jobID}`);
+
+
 export default API;
