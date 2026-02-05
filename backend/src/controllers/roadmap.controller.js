@@ -11,7 +11,7 @@ const genAI=new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 export const generatePath=async (req,res)=>{
     try{
             //1.get the skill name from the user 
-            const {skill}=req.body;
+            const { skill } = req.body || {};
             if(!skill){
                 console.log('you need to provide a skill to get its learning path');
                 return res.status(400).json({message:"you need to provide a skill name to get its learning path"});
@@ -19,8 +19,8 @@ export const generatePath=async (req,res)=>{
 
             //2.set the prompt
             const prompt = `
-                Create a detailed learning path for mastering ${skill}.
-                Provide 4–6 stages.
+                Create a learning path for mastering ${skill}.
+                Provide 3 stages.
                 For each stage return an object:
                 {
                     "title": "...",
@@ -91,3 +91,66 @@ export const generatePath=async (req,res)=>{
         
     }
 }
+
+export const removeRoadmap=async(req,res)=>{
+     //get the raodmap id
+    //find the user 
+    //check if the user is authorize to delete the roadmap
+    //delete the roadmap and its ref formt he user model too
+    //reurn response
+
+    try{
+        const roadmapId=req.params._id;
+        const userId = req.user._id;
+      
+
+        // Check if roadmap belongs to the current user
+        const roadmap = await RoadMap.findOne({ _id: roadmapId, user: userId });
+      
+        console.log(roadmap);
+
+
+     
+        
+
+        if (!roadmap) {
+        return res.status(404).json({
+            success: false,
+            message: "roadmap not found or unauthorized",
+        });
+        }
+
+         // Delete the roadmap
+        await roadmap.deleteOne();
+        //remove the ref form db
+                await User.findByIdAndUpdate(userId, {
+                $pull: { roadMaps: roadmapId },
+                $inc:{activeLearningPaths:-1}//decrement the activeLearningPaths count in that user 
+                });
+
+         console.log("the roadmap  was removed");
+
+          return res.status(200).json({
+          success: true,
+          message: "roadmap removed successfully",
+          });
+
+    }catch (err) {
+        console.error("REMOVE ROADMAP ERROR:", err);
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+        });
+}
+}
+
+
+
+
+
+
+
+
+
+//this controller needs debugging so 
+

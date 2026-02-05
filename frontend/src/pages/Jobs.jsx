@@ -46,10 +46,11 @@ const Jobs = () => {
       </div>
       <div>
         <button 
-          className='bg-gradient-to-r from-purple-500 via-blue-400 to-blue-500  rounded-lg p-2'
+          className='bg-gradient-to-r from-purple-500 via-blue-400 to-blue-500  rounded-lg p-2 flex '
           onClick={()=>handleClick()}
         >
-          Add Application 
+          <Plus/>
+          Add Job 
         </button>
       </div>
        </div>
@@ -58,19 +59,19 @@ const Jobs = () => {
          <form action="" className='p-4 md:flex justify-between gap-1'>
          <div className='flex flex-col flex-wrap'>
            <label htmlFor="">title</label>
-           <input type="text" className='bg-zinc-700 rounded-lg' onChange={(e)=>{setTitle(e.target.value)}}/>
+           <input type="text" className='bg-zinc-700 rounded-lg pl-1' onChange={(e)=>{setTitle(e.target.value)}}/>
          </div>
           <div className='flex flex-col'>
            <label htmlFor="">company</label>
-           <input type="text" className='bg-zinc-700 rounded-lg' onChange={(e)=>{setCompany(e.target.value)}}/>
+           <input type="text" className='bg-zinc-700 rounded-lg pl-1' onChange={(e)=>{setCompany(e.target.value)}}/>
          </div>
          <div className='flex flex-col'>
            <label htmlFor="">location</label>
-           <input type="text" className='bg-zinc-700 rounded-lg' onChange={(e)=>{setLocation(e.target.value)}}/>
+           <input type="text" className='bg-zinc-700 rounded-lg pl-1' onChange={(e)=>{setLocation(e.target.value)}}/>
          </div>
          <div className='flex flex-col'>
            <label htmlFor="">salary</label>
-           <input type="Number" className='bg-zinc-700 rounded-lg' onChange={(e)=>{setSalary(Number(e.target.value))}}/>
+           <input type="Number" className='bg-zinc-700 rounded-lg pl-1' onChange={(e)=>{setSalary(Number(e.target.value))}}/>
          </div>
          <div className='flex flex-col'>
            <label htmlFor="">status</label>

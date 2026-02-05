@@ -104,7 +104,7 @@ export const removeJob=async(req,res)=>{
         const userId = req.user._id;
 
         // Check if job belongs to the current user
-        const job = await Job.findOne({ _id: jobId, user: userId });
+        const job = await Job.findOne({_id:jobId, user:userId});
 
         if (!job) {
         return res.status(404).json({

@@ -75,7 +75,7 @@ const Resume = () => {
 
   return (
     <div className='bg-inherit min-h-screen text-white '>
-       <div className='p-2'>
+       <div className='p-6'>
             <div className='text-2xl font-semibold'>Resume Analyzer</div>
             <div className='text-gray-400'>Get AI-powered feedback to improve your resume</div>
         </div>

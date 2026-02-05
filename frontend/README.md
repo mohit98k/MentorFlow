@@ -140,7 +140,11 @@ after updating the job use onUpdate(res.data); res is the updated job
 
 *** ROADMAPS ***
 
+i was using the get method for generating the roadmap but that didnt work 
 
+GET = read only, no body
+POST = send data  
+If backend reads req.body, the frontend must use POST or PUT
 
 
 

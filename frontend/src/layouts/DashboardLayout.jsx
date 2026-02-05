@@ -15,9 +15,7 @@ const DashboardLayout = () => {
   const [resumeSuggestions, setResumeSuggestions] = useState([]);
   const {setUser,setLoading}=useUser();
 
-  useEffect(()=>{
-
-     const fetchUser=async()=>{
+    const fetchUser=async()=>{
         try{
           const res=await getUser();
           setUser(res.data);
@@ -28,10 +26,16 @@ const DashboardLayout = () => {
           setLoading(false);
         }
       };
-      fetchUser();
 
+useEffect(()=>{
+      fetchUser();
     },[]);
     
+// useEffect(() => {
+//   const interval = setInterval(fetchUser, 3000);
+//   return () => clearInterval(interval);
+// }, []);
+
 
   const [open , setOpen]=useState(false);
   return (

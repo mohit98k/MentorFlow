@@ -48,6 +48,7 @@ export const analyzeResume=(data)=>API.post("resume/upload",data);//the data has
 export const addJob=(data)=>API.post("/job/jobs",data);
 export const updateJob=(jobID,data)=>API.put(`/job/jobs/${jobID}`,data);
 export const deleteJob=(jobID)=>API.delete(`job/jobs/${jobID}`);
-
+//roadmaps routes
+export const generateRoadmap=(data)=>API.post("/roadmaps/generate",data);
 
 export default API;
