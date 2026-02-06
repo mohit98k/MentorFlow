@@ -5,7 +5,7 @@ import { SquarePen } from 'lucide-react';
 import { useState } from "react";
 import { Save } from 'lucide-react';
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job,onDelete }) => {
   const { title, company, location, status, salary } = job;
   const [openMenu,setOpenMenu]=useState(false);
 
@@ -18,7 +18,7 @@ const JobCard = ({ job }) => {
   const handleDelete=async()=>{
     try{
       const res=await deleteJob(job._id);
-      
+      onDelete(job.title)
       console.log(res); 
     }catch(err){
       console.log(err);

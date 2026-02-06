@@ -131,11 +131,8 @@ in the jobs page get the user and display the jobs array as in cards
 
 while updating the jobs in the jobcard.jsx using the handleUpdate -> Backend updates the job in DB , frontend ui only updates on refresh , 
 React only re-renders when state or props change not when the db changes .
-When a job is edited in JobCard, it must ask the parent to update the state. so use onUpdate function
-it takes the updated job form the child jobcard
-loops over the current job list if the id matches it updates the joblist and ui updates 
-pass the onupdate function as props to jobcard
-after updating the job use onUpdate(res.data); res is the updated job 
+so use useEffect to initially set the jobs into a jobs state then after generating a new one just add the new one to the state 
+then react will se a change in state and itll trigger re render 
 
 
 *** ROADMAPS ***

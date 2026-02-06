@@ -2,12 +2,13 @@ import React from "react";
 import { X } from "lucide-react";
 import { deleteSkill } from "../../api/axios";
 
-const SkillTag = ({skillname}) => {
+const SkillTag = ({onDelete,skillname}) => {
 
 
-  const handleClick=async(skillname)=>{
+  const handleClick=async()=>{
    try{
     const res=deleteSkill(skillname);
+     onDelete(skillname);
     console.log(res+" skill :"+skillname+" deleted");
    }catch(err){
     console.log(err);
@@ -20,7 +21,7 @@ const SkillTag = ({skillname}) => {
        {skillname}
       <div className="p-1">
         <X className="h-3 w-3 absolute right-0 top-0 bg-white rounded-2xl hover:bg-pink-400"
-           onClick={()=>{handleClick(skillname)}}
+           onClick={()=>{handleClick()}}
         ></X>
       </div>
     </div>

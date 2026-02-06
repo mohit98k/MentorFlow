@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Target, FileText, Briefcase , TrendingUp ,Sparkles } from "lucide-react";
 import { useUser } from '../context/UserContext';
 import { useState } from 'react';
@@ -7,8 +7,15 @@ import { generateRoadmap } from '../api/axios';
 const Roadmaps = () => {
 
   const {user ,loading }=useUser();       
-  const [roadmap,setRoadmap]=useState("");
+  const [roadmap,setRoadmap]=useState([]);
 
+  useEffect(()=>{
+    if(user?.user?.roadMaps){
+      setRoadmap(user.user.roadMaps);
+      console.log(user);
+    }
+  },[user]);
+  
     //save the app from crash 
     if (loading) {
       return <div className="text-white">Loading...</div>;
@@ -17,11 +24,15 @@ const Roadmaps = () => {
       return null; 
     }
 
+ 
+
   const handleClick=async()=>{
     try{
       if(roadmap=="")return;
       const res=await generateRoadmap({ skill: roadmap });
-      console.log(res);
+      setRoadmap(prev => [...prev, res]);
+     
+      
     }catch(err){
       console.log(err);
     }

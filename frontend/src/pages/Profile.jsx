@@ -4,7 +4,7 @@ import { addSkill } from '../api/axios';
 import { useUser } from '../context/UserContext';
 import { User, Briefcase, Plus } from "lucide-react";
 import SkillTag from '../components/ui/skilltag';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 const Profile = () => {
@@ -15,6 +15,14 @@ const Profile = () => {
    const [newEmail,setNewEmail]=useState("");
    const [newSkill,setNewSkill]=useState("");
    const [emailError,setemailError]=useState("");
+   const [skills,setSkills]=useState([]);
+
+   useEffect(()=>{
+    if(user?.user?.skills){
+      setSkills(user.user.skills);
+    }
+   },[user?.user?.skills]);
+
     //save the app from crash 
     if (loading) {
       return <div className="text-white">Loading...</div>;
@@ -23,7 +31,7 @@ const Profile = () => {
       return null; 
     }
    
-   let skills=user.user.skills;
+   
    const [fname, lname] = user.user.fullName.split(" ");
    const email=user.user.email;
   
@@ -34,6 +42,7 @@ const Profile = () => {
      const res= await addSkill({skill: newSkill});
       console.log(res);
       console.log(newSkill+" added to skill")
+       setSkills(prev => [...prev, newSkill]);
     }catch(err){
       console.log(err);
     }
@@ -52,7 +61,10 @@ const Profile = () => {
     }
    }
    
-
+   //to immediately update ui , will pass this function to the skilltag compo 
+   const onDelete=(skillname)=>{
+    setSkills(prev => prev.filter(s => s !== skillname))
+   }
    
   
   return (
@@ -125,7 +137,7 @@ const Profile = () => {
 
             <div className='m-4 '>
                 {skills.map((s, i) => (
-                  <SkillTag key={i} skillname={s} />
+                  <SkillTag key={i} skillname={s} onDelete={onDelete} />
                 ))}
             </div>
       </div >

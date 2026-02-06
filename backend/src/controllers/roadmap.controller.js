@@ -20,8 +20,10 @@ export const generatePath=async (req,res)=>{
             //2.set the prompt
             const prompt = `
                 Create a learning path for mastering ${skill}.
-                Provide 3 stages.
-                For each stage return an object:
+                keep description short and simple , 
+                some little milestones 
+                and some resources
+                 return an object:
                 {
                     "title": "...",
                     "description": "...",
