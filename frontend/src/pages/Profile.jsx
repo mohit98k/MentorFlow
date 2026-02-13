@@ -3,7 +3,7 @@ import { update } from '../api/axios';
 import { addSkill } from '../api/axios';
 import { useUser } from '../context/UserContext';
 import { User, Briefcase, Plus } from "lucide-react";
-import SkillTag from '../components/ui/skilltag';
+import SkillTag from "../components/ui/SkillTag";
 import { useState,useEffect } from 'react';
 
 
