@@ -7,7 +7,7 @@ app.use(cookieParser());
 
 //global middlewares
 app.use(cors({
-    origin:"http://localhost:5173" //  React frontend
+    origin:process.env.CLIENT_URL, //  React frontend
 }));
 
 app.use(express.json()); // to parse JSON bodies
