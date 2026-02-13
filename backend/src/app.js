@@ -8,6 +8,7 @@ app.use(cookieParser());
 //global middlewares
 app.use(cors({
     origin:process.env.CLIENT_URL, //  React frontend
+     credentials: true
 }));
 
 app.use(express.json()); // to parse JSON bodies
