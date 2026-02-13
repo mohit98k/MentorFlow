@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/navigator/Sidebar';
+import Sidebar from '../components/navigator/sidebar';
 import { Menu } from 'lucide-react';
 import { X } from 'lucide-react';
 import { useState } from 'react';
