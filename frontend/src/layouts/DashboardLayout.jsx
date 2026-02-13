@@ -19,7 +19,7 @@ const DashboardLayout = () => {
         try{
           const res=await getUser();
           setUser(res.data);
-          console.log(res);
+          // console.log(res);
         }catch(err){
           console.log(err);
         }finally{

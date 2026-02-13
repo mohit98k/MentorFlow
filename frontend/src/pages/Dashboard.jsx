@@ -36,7 +36,7 @@ const Dashboard = () => {
     return null; 
   }
  
- console.log(user); 
+//  console.log(user); 
 
   return (
     <div className='min-h-screen bg-inherit p-5 '>

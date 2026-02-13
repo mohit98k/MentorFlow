@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
-import { Target, FileText, Briefcase , TrendingUp ,Sparkles } from "lucide-react";
+import { Sparkles ,Map , ChevronDown ,ChevronUp } from "lucide-react";
 import { useUser } from '../context/UserContext';
 import { useState } from 'react';
 import { generateRoadmap } from '../api/axios';
+import RoadmapCard from '../components/ui/RoadmapCard';
+
 
 const Roadmaps = () => {
 
   const {user ,loading }=useUser();       
   const [roadmap,setRoadmap]=useState([]);
-
+  const [querryPath,setQuerryPath]=useState("");
+  
   useEffect(()=>{
     if(user?.user?.roadMaps){
       setRoadmap(user.user.roadMaps);
-      console.log(user);
+      // console.log(user);
     }
   },[user]);
   
@@ -24,20 +27,21 @@ const Roadmaps = () => {
       return null; 
     }
 
- 
+
+//  console.log("here is the roadmap state")
+//  console.log(roadmap)
 
   const handleClick=async()=>{
     try{
-      if(roadmap=="")return;
-      const res=await generateRoadmap({ skill: roadmap });
-      setRoadmap(prev => [...prev, res]);
-     
-      
+      if(querryPath=="")return;
+      const res=await generateRoadmap({ skill: querryPath });
+      console.log("the result f the api")
+      // console.log(res)
+      setRoadmap(prev => [ res.data.path,...prev]);
     }catch(err){
       console.log(err);
     }
   }
-
 
   return (
     <div  className='min-h-screen text-white'>
@@ -51,16 +55,31 @@ const Roadmaps = () => {
           <input type="text" 
           placeholder='e.g. Software Engineer , Data Scientist , Product Manager' 
           className='text-white rounded-lg bg-zinc-600 p-1' 
-          onChange={(e)=>setRoadmap(e.target.value)}
+          onChange={(e)=>setQuerryPath(e.target.value)}
           />
           <button 
-          className='bg-gradient-to-r from-purple-500 via-blue-400 to-blue-500  rounded-lg p-2 w-52 flex gap-2'
+          className='bg-gradient-to-tr from-purple-500 via-blue-400 to-blue-500  rounded-lg p-2 w-52 flex gap-2'
           onClick={()=>handleClick()}
           >
             <Sparkles/>
           Generate Roadmap
         </button>
       </div>
+
+
+      {/* display the roadmaps of the user  */}
+
+    {  roadmap.length>0 && (
+        <div className='border-2 border-white hover:border-blue-400 m-4 p-4'>
+           
+               {roadmap.map((r,i)=>(
+                <div  key={i} className='border border-green-200  mb-2 p-2 '>
+                    <RoadmapCard rmap={r} />
+                </div>
+               ))}
+            
+        </div>)
+      }
     </div>
   )
 }
