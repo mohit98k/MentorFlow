@@ -8,6 +8,20 @@ api/ - for axios setup
 
 ***GENERAL***
 
+
+Tailwind responsiveness model
+
+default → mobile
+sm:     ≥ 640px
+md:     ≥ 768px
+lg:     ≥ 1024px
+xl:     ≥ 1280px
+2xl:    ≥ 1536px
+
+Write mobile styles first. Add overrides at breakpoints.
+
+
+
 e.preventDefault(); use this to not relode after form submission ;
 
 For base url like http://localhost3000 set the register page as default component or the dashboard for the authenticated user;

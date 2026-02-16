@@ -126,7 +126,7 @@ const Resume = () => {
                 {complement}
             </div>
             <div className='text-gray-400 mb-5'>
-              Your resume shows good structure and relevant experience
+              Your resume should show good structure and relevant experience
             </div>
         </div>
       </div>

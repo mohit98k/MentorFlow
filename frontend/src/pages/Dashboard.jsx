@@ -30,7 +30,7 @@ const Dashboard = () => {
   const {user,loading} =useUser();
   //save the app from crash 
   if (loading) {
-    return <div className="text-white">Loading...</div>;
+    return <div className="text-white flex  justify-center">Loading...</div>;
   }
   if (!user) {
     return null; 

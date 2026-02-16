@@ -11,6 +11,7 @@ const Roadmaps = () => {
   const {user ,loading }=useUser();       
   const [roadmap,setRoadmap]=useState([]);
   const [querryPath,setQuerryPath]=useState("");
+  const [reqSent,setRequestsent]=useState(false);
   
   useEffect(()=>{
     if(user?.user?.roadMaps){
@@ -34,8 +35,10 @@ const Roadmaps = () => {
   const handleClick=async()=>{
     try{
       if(querryPath=="")return;
+      setRequestsent(true);
       const res=await generateRoadmap({ skill: querryPath });
-      console.log("the result f the api")
+      setQuerryPath("");
+      setRequestsent(false);
       // console.log(res)
       setRoadmap(prev => [ res.data.path,...prev]);
     }catch(err){
@@ -54,15 +57,17 @@ const Roadmaps = () => {
           <label htmlFor="">What's your career goal?</label>
           <input type="text" 
           placeholder='e.g. Software Engineer , Data Scientist , Product Manager' 
-          className='text-white rounded-lg bg-zinc-600 p-1' 
+          className='text-white rounded-lg bg-zinc-600 p-1'
+          value={querryPath} 
           onChange={(e)=>setQuerryPath(e.target.value)}
           />
           <button 
           className='bg-gradient-to-tr from-purple-500 via-blue-400 to-blue-500  rounded-lg p-2 w-52 flex gap-2'
           onClick={()=>handleClick()}
+          disabled={reqSent}
           >
             <Sparkles/>
-          Generate Roadmap
+          {reqSent?"Generating...":"Generate"}
         </button>
       </div>
 
