@@ -5,6 +5,11 @@ import cookieParser from "cookie-parser";
 
 app.use(cookieParser());
 
+//for the uptime robot 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 //global middlewares
 app.use(cors({
     origin:process.env.CLIENT_URL, //  React frontend
